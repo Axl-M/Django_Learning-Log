@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
 
-</body>
-</html>
+<!--</body>-->
+<!--</html>-->
+
+
+
+{% extends "learning_logs/base.html" %}
+{% block content %}
+<p>Topics / ТЕМЫ</p>
+<ul>
+    {% for topic in topics %}
+    <li>{{ topic }}</li>
+    {% empty %}
+    <li>No topics have been added yet. / Ни одной темы ещё не добавлено.</li>
+    {% endfor %}
+</ul>
+{% endblock content %}
