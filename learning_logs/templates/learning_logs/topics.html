@@ -16,9 +16,13 @@
 <p>Topics / ТЕМЫ</p>
 <ul>
     {% for topic in topics %}
-    <li>{{ topic }}</li>
+    <li>
+        <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+    </li>
     {% empty %}
     <li>No topics have been added yet. / Ни одной темы ещё не добавлено.</li>
     {% endfor %}
 </ul>
 {% endblock content %}
+
+
