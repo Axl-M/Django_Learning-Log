@@ -7,9 +7,10 @@
         <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
     </li>
     {% empty %}
-    <li>No topics have been added yet. / Ни одной темы ещё не добавлено.</li>
+    <li>Ни одной темы ещё не добавлено. / No topics have been added yet. </li>
     {% endfor %}
 </ul>
+<a href="{% url 'learning_logs:new_topic' %}">Добавить новую тему:</a>
 {% endblock content %}
 
 
