@@ -6,4 +6,6 @@ from . import views
 urlpatterns = [
     # Домашняя страница
     url(r'^$', views.index, name='index'),
-    ]
+    # Вывод всех тем.
+    url(r'^topics/$', views.topics, name='topics'),
+]
