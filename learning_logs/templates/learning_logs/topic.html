@@ -1,7 +1,10 @@
 {% extends 'learning_logs/base.html' %}
 {% block content %}
-<p>Тема: {{ topic }}</p>
-<p>Запись:</p>
+<p>Тема / Topic: {{ topic }}</p>
+<p>Запись /Entry:</p>
+<p>
+    <a href="{% url 'learning_logs:new_entry' topic.id %}">Добавить новую запись / add new entry</a>
+</p>
 <ul>
     {% for entry in entries %}
     <li>
