@@ -14,6 +14,7 @@
         Приветствуем Вас / Hello, {{ user.username }}.
         <a href="{% url 'users:logout' %}">Выйти / log out</a>
     {% else %}
+        <a href="{% url 'users:register' %}">Регистрация / register</a> ---=---
         <a href="{% url 'users:login' %}">Войти / log in</a>
     {% endif %}
 </p>
