@@ -11,7 +11,9 @@ urlpatterns = [
     # Когда Django читает этот URL-адрес, слово users указывает, что следует обратиться к users/urls.py,
     # а login сообщает о том, что запросы должны отправляться представлению login по умолчанию
     # url(r'^login/$', login, {'template_name': 'users/login.html'}, name='login')
-    url(r'^login/$', LoginView.as_view(template_name='users/login.html'), name='login')
+    url(r'^login/$', LoginView.as_view(template_name='users/login.html'), name='login'),
+    # Страница выхода
+    url(r'^logout/$', views.logout_view, name='logout'),
 ]
 #
 # url(r'^$', views.index, name='index'),
