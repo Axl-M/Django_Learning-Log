@@ -49,7 +49,10 @@ def new_topic(request):
         form = TopicForm(request.POST)
         # Отправленную информацию нельзя сохранять в базе данных пока она не будет проверена
         if form.is_valid():
-            form.save()
+            new_topic = form.save(commit=False)
+            new_topic.owner = request.user
+            new_topic.save()
+            # form.save()
             # Перенаправление пользователя к странице topics после отправки введенной темы
         # Функция reverse() определяет URL по заданной схеме URL(то есть Django сгенерирует URL при запросе страницы)
             # На этой странице пользователь видит только что введенную им тему в общем списке тем.
@@ -57,6 +60,7 @@ def new_topic(request):
 # Так как при создании TopicForm аргументы не передавались, Django создает пустую форму, которая заполняется пользователем.
     context = {'form': form}
     return render(request, 'learning_logs/new_topic.html', context)
+
 
 
 # topic_id для сохранения полученного значения из URL.
@@ -89,6 +93,8 @@ def edit_entry(request, entry_id):
     """ Редактирует существующую запись."""
     entry = Entry.objects.get(id=entry_id)
     topic = entry.topic
+    if topic.owner != request.user:
+        raise Http404
     if request.method != 'POST':
         # Исходный запрос; форма заполняется данными текущей записи.
         # instance=entry этот аргумент приказывает Django создать форму, заранее заполненную информацией из
