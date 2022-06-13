@@ -70,6 +70,8 @@ def new_topic(request):
 def new_entry(request, topic_id):
     """ Добавляет новую запись по конкретной теме."""
     topic = Topic.objects.get(id=topic_id)
+    if topic.owner != request.user:  # теперь подставить ID чужой темы в URL не выйдет
+        raise Http404
     if request.method != 'POST':
         # Данные не отправлялись; создается пустая форма.
         form = EntryForm()
@@ -77,7 +79,11 @@ def new_entry(request, topic_id):
         # Отправлены данные POST; обработать данные.
         # Экземпляр EntryForm, заполненный данными POST из объекта запроса
         form = EntryForm(data=request.POST)
+
         if form.is_valid():
+            # чтобы нельзя было добавить новую запись в журнал другого пользователя,
+            # вводя URL-адрес с идентификатором темы, принадлежащей другому пользователю
+
             # аргумент commit=False для того, чтобы создать новый объект записи и сохранить его в new_entry,
             # не сохраняя пока в базе данных
             new_entry = form.save(commit=False)
