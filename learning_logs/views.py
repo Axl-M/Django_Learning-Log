@@ -1,7 +1,9 @@
+# learning_logs/views.py
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 # from django.core.urlresolvers import reverse
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
 
@@ -12,6 +14,9 @@ def index(request):
     return render(request, 'learning_logs/index.html')
 
 
+# Когда пользователь, не прошедший проверку, запрашивает страницу, защищенную декоратором @login_required,
+# Django отправляет пользователя на URL-адрес, определяемый LOGIN_URL в settings.py
+@login_required
 def topics(request):
     """ Выводит список тем """
     topics = Topic.objects.order_by('date_added')
@@ -59,7 +64,7 @@ def new_entry(request, topic_id):
         form = EntryForm()
     else:
         # Отправлены данные POST; обработать данные.
-        # экземпляр EntryForm, заполненный данными POST из объекта запроса
+        # Экземпляр EntryForm, заполненный данными POST из объекта запроса
         form = EntryForm(data=request.POST)
         if form.is_valid():
             # аргумент commit=False для того, чтобы создать новый объект записи и сохранить его в new_entry,
