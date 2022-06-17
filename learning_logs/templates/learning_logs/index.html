@@ -7,11 +7,33 @@
 <body>
     {% extends "learning_logs/base.html" %}
 
+    {% block header %}
+    <div class="jumbotron" >
+        <h2>Отслеживайте прогресс вашего обучения <br> Track your Learning</h2>
+    </div>
+    {% endblock header %}
+
     {% block content %}
-    <p>Learning Log</p>
-    <p>Learning Log helps you keep track of your learning, for any topic you're
-    learning about.</p>
-    <p>Здесь вы можете отслеживать прогресс обучения, по любым темам которые вы изучаете.</p>
+    <h3>
+        <a href="{% url 'users:register' %}">Зарегестрируйтесь / Register an account</a> <br>
+        Чтобы создать ваш собственный ЖУРНАЛ с ТЕМАМИ которые вы изучаете <br>
+    </h3>
+    <h4>
+        to make your own Learning Log, and list the topics you're learning about.
+    </h4>
+    <hr>
+    <h3>
+        Когда вы изучите что-либо, запишите итоговые выводы по изученной теме.
+    </h3>
+    <h4>
+        Whenever you learn something new about a topic, make an entry
+        summarizing what you've learned.
+    </h4>
+
+<!--    <p>Learning Log</p>-->
+<!--    <p>Learning Log helps you keep track of your learning, for any topic you're-->
+<!--    learning about.</p>-->
+<!--    <p>Здесь вы можете отслеживать прогресс обучения, по любым темам которые вы изучаете.</p>-->
     {% endblock content %}
 
 </body>
