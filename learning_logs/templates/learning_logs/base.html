@@ -1,5 +1,6 @@
 {% load bootstrap3 %}
-<!DOCTYPE html>
+
+<!--<!DOCTYPE ht/ml>-->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -12,21 +13,58 @@
 
 </head>
 <body>
+    <!-- Статическая навигационная панель -->
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
 
-<p>
-    <a href="{% url 'learning_logs:index' %}">Журнал / Learning Log</a>   ---=---
+            <div class="navbar-header">
+<!--                кнопка разворачивания меню на маленьких экранах/ телефонах-->
+<!--                будет отображаться, если ширины окна браузера не хватает для горизонтального -->
+<!--                отображения всей навигационной панели.-->
+                <button type="button" class="navbar-toggle collapsed"
+                        data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                </button>
+<!--                имя проекта выводится у левого края навигационной панели. Будет присутствовать на каждой -->
+<!--                странице проекта, оно оформляется в виде ссылки на домашнюю страницу-->
+                <a class="navbar-brand" href="{% url 'learning_logs:index' %}">
+                    Журнал / Learning Log</a>
+            </div>
 
-    <a href="{% url 'learning_logs:topics' %}">Темы / Topics</a> ---=---
-    {% if user.is_authenticated %}
-        Приветствуем Вас / Hello, {{ user.username }}.
-        <a href="{% url 'users:logout' %}">Выйти / log out</a>
-    {% else %}
-        <a href="{% url 'users:register' %}">Регистрация / register</a> ---=---
-        <a href="{% url 'users:login' %}">Войти / log in</a>
-    {% endif %}
-</p>
+            <div id="navbar" class="navbar-collapse collapse">
+<!--                определяется набор ссылок для навигации по сайту-->
+<!--                каждая ссылка является элементом списка (<li>)-->
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'learning_logs:topics' %}">Темы / Topics</a></li>
+                </ul>
 
-{% block content %}{% endblock content %}
+<!--                создается второй список навигационных ссылок, выводится в правой части навигационной -->
+<!--                панели, ссылки для входа/регистрации пользователя. Выводится либо приветствие для -->
+<!--                пользователя и ссылка для выхода, либо ссылки для регистрации и входа.-->
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                    <li><a>Приветствуем Вас / Hello, {{ user.username }}.</a></li>
+                    <li><a href="{% url 'users:logout' %}">Выйти / log out</a></li>
+                    {% else %}
+                    <li><a href="{% url 'users:register' %}">Регистрация / register</a></li>
+                    <li><a href="{% url 'users:login' %}">Войти / log in</a></li>
+                    {% endif %}
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+
+<!--    основной контент страницы-->
+    <div class="container">
+<!--   содержит сведения о том, какая информация размещается на странице и что можно сделать на странице.-->
+        <div class="page-header">
+            {% block header %}{% endblock %}
+        </div>
+        <div>
+            {% block content %}{% endblock %}
+        </div>
+
+    </div> <!-- /container -->
 
 </body>
 </html>
