@@ -1,8 +1,14 @@
 {% extends "learning_logs/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+<h2>Редактирование записи</h2>
+<h3>Edit entry</h3>
+{% endblock header %}
 
 {% block content %}
 
-<p><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></p>
+<p><a href="{% url 'learning_logs:topic' topic.id %}">Тема: {{ topic }}</a></p>
 <p>Редактировать запись / Edit entry:</p>
 
 <!--аргумент action отправляет форму функции edit_entry() для обработки. -->
@@ -11,7 +17,7 @@
 <form action="{% url 'learning_logs:edit_entry' entry.id %}" method='post'>
   {% csrf_token %}
   {{ form.as_p }}
-  <button name="submit">Сохранить запись</button>
+  <button name="submit" class="btn btn-primary">Сохранить запись / Save</button>
 </form>
 
 {% endblock content %}
