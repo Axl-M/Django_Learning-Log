@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # сторонние приложения
     'bootstrap3',
+    # 'bootstrap4',
     # мои приложения
     'learning_logs',
     'users',
@@ -133,3 +134,6 @@ LOGIN_URL = '/users/login'
 BOOTSTRAP3 = {
     'include_jquery': True,
 }
+# BOOTSTRAP4 = {
+#     'include_jquery': True,
+# }
