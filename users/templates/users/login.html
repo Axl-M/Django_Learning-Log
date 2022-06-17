@@ -1,17 +1,35 @@
 {% extends "learning_logs/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+<h2>Войдите в ваш аккаунт.</h2>
+<h3>Log in to your account.</h3>
+{% endblock header %}
+
+
 {% block content %}
+<!--   добавляется атрибут class="form", после чего при отображении формы используется шаблонный -->
+<!--   тег (% bootstrap_form %) заменяет тег ({ form.as_p }),-->
+<form method="post" action="{% url 'users:login' %}" class="form">
 
-{% if form.errors %}
-    <p>Имя пользователя и пароль не соответствуют. Попробуйте снова.</p>
-    <p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+<!--НЕ НУЖНА.  django-bootstrap3 управляет ошибками формы автоматически.-->
+<!--{% if form.errors %}-->
+<!--    <p>Имя пользователя и пароль не соответствуют. Попробуйте снова.</p>-->
+<!--    <p>Your username and password didn't match. Please try again.</p>-->
+<!--{% endif %}-->
 
-<form method="post" action="{% url 'users:login' %}">
 {% csrf_token %}
-{{ form.as_p }}
 
-<button name="submit">Войти / log in</button>
+<!--   Шаблонный тег (% booststrap_form %) вставляет правила в стиле Bootstrap в отдельные элементы -->
+<!--   формы при ее построении.-->
+{% bootstrap_form form %}
+<!--{{ form.as_p }}-->
+
+<!--шаблонный тег bootstrap3 (% buttons %) добавляет стилевое оформление Bootstrap к кнопкам.-->
+{% buttons %}
+    <button name="submit" class="btn btn-primary">Войти / log in</button>
+{% endbuttons %}
+
 <input type="hidden" name="next" value="{% url 'learning_logs:index' %}" />
 </form>
-
 {% endblock content %}
