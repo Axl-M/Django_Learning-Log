@@ -7,7 +7,7 @@
 {% block content %}
 
 <p>
-    <a href="{% url 'learning_logs:new_entry' topic.id %}">Добавить новую запись / add new entry</a>
+    <a class="btn btn-primary" href="{% url 'learning_logs:new_entry' topic.id %}">Добавить новую запись / add new entry</a>
 </p>
 
 {% for entry in entries %}
@@ -17,7 +17,7 @@
             {{ entry.date_added|date:'M d, Y H:i' }}
 <!--        сделать чуть меньше -->
             <small>
-                <a href="{% url 'learning_logs:edit_entry' entry.id %}">
+                <a class="btn btn-primary" href="{% url 'learning_logs:edit_entry' entry.id %}">
                     edit entry</a>
             </small>
         </h4>
